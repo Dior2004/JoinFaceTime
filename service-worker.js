@@ -1,6 +1,12 @@
-const cacheName = "Join FaceTime";
+const cacheName = "Join FaceTime dev1";
 
-const cacheAssets = ["/", "/index.html", "/style.css", "/main.js"];
+const cacheAssets = [
+  "/",
+  "/favicon.ico",
+  "/index.html",
+  "/style.css",
+  "/main.js",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
