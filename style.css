@@ -239,6 +239,10 @@ video {
   scale: 1.05;
 }
 
+.control_btn > i {
+  color: #fff;
+}
+
 .hangup {
   background-color: red;
   rotate: 138deg;
