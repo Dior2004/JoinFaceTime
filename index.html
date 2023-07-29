@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Join FaceTime</title>
+  </head>
+  <body>
+    <div id="backgroundBlur">
+      <video id="bgPlay" autoplay playsinline muted></video>
+    </div>
+    <main>
+      <div class="main-wrap">
+        <h1 style="margin-bottom: 30px">Join FaceTime</h1>
+
+        <form id="createChannelForm">
+          <input
+            id="channelName"
+            type="text"
+            placeholder="Room Name"
+            required
+          />
+          <button id="joinBtn" type="submit">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            Join
+          </button>
+        </form>
+
+        <h3 id="headingMessage"></h3>
+        <p id="userMessage"></p>
+        <p id="devoted-message">Devoted to my mother</p>
+      </div>
+      <div id="stream-wrap">
+        <div>
+          <div id="videoStreams">
+            <div class="video-container chosen" id="myVideoPlayer"></div>
+          </div>
+
+          <div id="controllers">
+            <div class="control_btn">
+              <i class="fa-solid fa-camera-rotate"></i>
+            </div>
+            <div class="control_btn" id="muteMic">
+              <i id="micIcon" class="fa-solid fa-microphone"></i>
+            </div>
+            <div class="control_btn" id="muteCam">
+              <i id="camIcon" class="fa-solid fa-video"></i>
+            </div>
+            <div class="control_btn hangup" id="leave">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then((registration) => {
+              console.log("Service Worker registered:", registration);
+            })
+            .catch((error) => {
+              console.log("Service Worker registration failed:", error);
+            });
+        });
+      }
+    </script>
+    <script src="/AgoraRTC_N-4.18.2.js"></script>
+    <script src="/main.js"></script>
+  </body>
+</html>

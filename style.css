@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  color: #d1dae2;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  min-width: 350px;
+  min-height: 610px;
+  background-color: #121212;
+  position: relative;
+}
+
+#backgroundBlur {
+  width: 100%;
+  height: 100%;
+  background-color: #2323095f;
+  position: relative;
+}
+
+#backgroundBlur #bgPlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+  z-index: -1;
+}
+
+body main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  overflow: hidden;
+}
+
+body main .main-wrap {
+  width: 600px;
+  height: 100%;
+  min-width: 350px;
+  padding: 70px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transition: 0.8s;
+}
+
+#createChannelForm {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#createChannelForm > input {
+  width: 200px;
+  height: 100%;
+  font-size: 16px;
+  padding: 15px;
+  margin-right: 10px;
+  caret-color: #00f731b3;
+  color: #fff;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 15px 70px #00000055;
+  transition: 0.3s;
+}
+
+#createChannelForm > input::-webkit-input-placeholder {
+  color: #d1dae2;
+}
+
+#joinBtn {
+  height: 100%;
+  padding: 0 15px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #00f731b3;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 15px 70px #00000055;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+#joinBtn:hover,
+#createChannelForm > input:hover {
+  scale: 1.05;
+}
+
+#joinBtn > i {
+  color: #fff;
+  margin-right: 5px;
+}
+
+body main .main-wrap h3 {
+  margin-top: 30px;
+  letter-spacing: 0.5px;
+}
+
+body main .main-wrap p {
+  width: 330px;
+  text-align: center;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+}
+
+#devoted-message {
+  font-size: 14px;
+  position: absolute;
+  bottom: 40px;
+  color: #d1dae288;
+}
+
+#stream-wrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #121212;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  overflow: hidden;
+}
+
+#stream-wrap > div {
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  position: relative;
+}
+
+#videoStreams {
+  width: 100%;
+  height: 230px;
+  padding: 15px 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  overflow-x: scroll;
+}
+
+#videoStreams::-webkit-scrollbar {
+  display: none;
+}
+
+.video-container {
+  width: 160px;
+  min-width: 160px;
+  height: 180px;
+  margin-right: 10px;
+  border-radius: 15px;
+  overflow: hidden;
+  color: #121212;
+  background-color: transparent;
+  box-shadow: 0 8px 18px #00000055;
+}
+
+.chosen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 0%;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+#controllers {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9;
+  min-width: 300px;
+  width: 330px;
+  height: 80px;
+  border-radius: 25px;
+  background-color: rgba(30, 30, 30, 0.5);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 8px 18px #00000055;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.control_btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 18px #00000055;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.control_btn:hover {
+  scale: 1.05;
+}
+
+.hangup {
+  background-color: red;
+  rotate: 138deg;
+}
