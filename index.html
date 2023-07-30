@@ -30,6 +30,7 @@
             type="text"
             placeholder="Room Name"
             required
+            autofocus
           />
           <button id="joinBtn" type="submit">
             <i class="fa-solid fa-arrow-right-to-bracket"></i>
@@ -48,8 +49,8 @@
           </div>
 
           <div id="controllers">
-            <div class="control_btn">
-              <i class="fa-solid fa-camera-rotate"></i>
+            <div class="control_btn" id="rotateCamera">
+              <i id="camRotateIcon" class="fa-solid fa-camera-rotate"></i>
             </div>
             <div class="control_btn" id="muteMic">
               <i id="micIcon" class="fa-solid fa-microphone"></i>

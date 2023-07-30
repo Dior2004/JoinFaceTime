@@ -44,6 +44,7 @@ if (!navigator.onLine) {
 function agoraCall() {
   var client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 
+  let currentCamera = "user";
   let localTracks = [];
   let remoteUsers = {};
 
@@ -53,7 +54,10 @@ function agoraCall() {
 
     let UID = await client.join(APP_ID, CHANNEL, null, null);
 
-    localTracks = await AgoraRTC.createMicrophoneAndCameraTracks();
+    localTracks = [
+      await AgoraRTC.createMicrophoneAudioTrack(),
+      await AgoraRTC.createCameraVideoTrack({ facingMode: currentCamera }),
+    ];
 
     let player = `<div class="video-player" id="user-${UID}"></div>`;
 
@@ -62,6 +66,30 @@ function agoraCall() {
       .insertAdjacentHTML("beforeend", player);
 
     localTracks[1].play(`user-${UID}`);
+
+    let rotateCam = async () => {
+      if (currentCamera === "user") {
+        currentCamera = "environment";
+      } else {
+        currentCamera = "user";
+      }
+
+      await localTracks[1].stop();
+      localTracks[1].close();
+
+      localTracks[1] = await AgoraRTC.createCameraVideoTrack({
+        facingMode: currentCamera,
+      });
+
+      localTracks[1].play(`user-${UID}`);
+
+      rotateCamera.style.backgroundColor =
+        currentCamera === "user"
+          ? "rgba(255, 255, 255, 0.2)"
+          : "rgba(255, 255, 255, 0.4)";
+    };
+
+    rotateCamera.addEventListener("click", rotateCam);
 
     await client.publish([localTracks[0], localTracks[1]]);
   };
