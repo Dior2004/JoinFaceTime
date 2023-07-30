@@ -76,10 +76,13 @@ function agoraCall() {
 
       await localTracks[1].stop();
       localTracks[1].close();
+      await client.unpublish([localTracks[1]]);
 
       localTracks[1] = await AgoraRTC.createCameraVideoTrack({
         facingMode: currentCamera,
       });
+
+      await client.publish[localTracks[1]];
 
       localTracks[1].play(`user-${UID}`);
 
@@ -90,6 +93,9 @@ function agoraCall() {
     };
 
     rotateCamera.addEventListener("click", rotateCam);
+
+    client.on("user-published", handleUserJoined);
+    client.on("user-unpublished", handleUserLeft);
 
     await client.publish([localTracks[0], localTracks[1]]);
   };
