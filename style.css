@@ -194,6 +194,10 @@ body main .main-wrap p {
 .video-player {
   width: 100%;
   height: 100%;
+  background-color: #101010;
+  background-image: url("/no-user-96.png");
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 video {
