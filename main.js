@@ -7,7 +7,6 @@ let joinBtn = document.getElementById("joinBtn");
 let leave = document.getElementById("leave");
 let muteMic = document.getElementById("muteMic");
 let muteCam = document.getElementById("muteCam");
-let rotateCamera = document.getElementById("rotateCamera");
 let clicked = false;
 const APP_ID = "62c1bcd773ea4592bb4f0f5ff8ad6b2e";
 let CHANNEL = "main";
@@ -207,7 +206,7 @@ function agoraCall() {
   leave.addEventListener("click", leaveAndRemoveLocalStream);
   muteMic.addEventListener("click", toggleMic);
   muteCam.addEventListener("click", toggleCam);
-  rotateCamera.addEventListener("click", flipCam);
+  document.querySelector("#rotateCamera").addEventListener("click", flipCam);
 }
 
 function lastChildDetection() {
