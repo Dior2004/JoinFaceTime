@@ -67,8 +67,6 @@ function agoraCall() {
       .getElementById("myVideoPlayer")
       .insertAdjacentHTML("beforeend", player);
 
-    document.getElementById("myVideoPlayer").style = "transform: scaleX(-1)";
-
     localTracks[1].play(`user-${UID}`);
 
     await client.publish([localTracks[0], localTracks[1]]);
@@ -99,6 +97,7 @@ function agoraCall() {
     if (!navigator.onLine) {
       window.location.reload();
     } else {
+      document.getElementById("myVideoPlayer").style = "transform: scaleX(-1);";
       CHANNEL = channelName.value;
       mainWrap.style = "opacity: 0; transition: 0.5s;";
       setTimeout(() => {
@@ -200,11 +199,11 @@ function agoraCall() {
         .getElementById("myVideoPlayer")
         .insertAdjacentHTML("beforeend", player);
 
-      document.getElementById("myVideoPlayer").style = "transform: scaleX(-1)";
       localTracks[1].play(`user-${UID}`);
 
       await client.publish([localTracks[0], localTracks[1]]);
 
+      document.getElementById("myVideoPlayer").style = "transform: scaleX(-1);";
       flipCamMessage.style.display = "none";
     } else {
       clicked = !clicked; // false
