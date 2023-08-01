@@ -198,6 +198,7 @@ function agoraCall() {
         .getElementById("myVideoPlayer")
         .insertAdjacentHTML("beforeend", player);
 
+      document.getElementById("myVideoPlayer").style = "transform: scaleX(-1)";
       localTracks[1].play(`user-${UID}`);
 
       await client.publish([localTracks[0], localTracks[1]]);
@@ -215,7 +216,7 @@ function agoraCall() {
       videoStreams.innerHTML = `<div class="video-container chosen" id="myVideoPlayer"></div>`;
 
       await joinAndDisplayLocalStream(CHANNEL);
-
+      document.getElementById("myVideoPlayer").style = "transform: scaleX(1)";
       flipCamMessage.style.display = "none";
     }
   };
