@@ -8,6 +8,7 @@ let leave = document.getElementById("leave");
 let muteMic = document.getElementById("muteMic");
 let muteCam = document.getElementById("muteCam");
 let rotateCamera = document.getElementById("rotateCamera");
+let flipCamMessage = document.getElementById("flipCamMessage");
 let clicked = false;
 const APP_ID = "62c1bcd773ea4592bb4f0f5ff8ad6b2e";
 let CHANNEL = "main";
@@ -171,6 +172,9 @@ function agoraCall() {
   let flipCam = async () => {
     if (!clicked) {
       clicked = !clicked; // true
+
+      flipCamMessage.style.display = "flex";
+
       localTracks[1].stop();
       localTracks[1].close();
 
@@ -197,9 +201,22 @@ function agoraCall() {
       localTracks[1].play(`user-${UID}`);
 
       await client.publish([localTracks[0], localTracks[1]]);
+
+      flipCamMessage.style.display = "none";
     } else {
       clicked = !clicked; // false
+      flipCamMessage.style.display = "flex";
+
+      localTracks[1].stop();
+      localTracks[1].close();
+
+      await client.leave();
+
+      videoStreams.innerHTML = `<div class="video-container chosen" id="myVideoPlayer"></div>`;
+
       await joinAndDisplayLocalStream(CHANNEL);
+
+      flipCamMessage.style.display = "none";
     }
   };
 
