@@ -67,6 +67,8 @@ function agoraCall() {
       .getElementById("myVideoPlayer")
       .insertAdjacentHTML("beforeend", player);
 
+    document.getElementById("myVideoPlayer").style = "transform: scaleX(-1)";
+
     localTracks[1].play(`user-${UID}`);
 
     await client.publish([localTracks[0], localTracks[1]]);
