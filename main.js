@@ -9,6 +9,7 @@ let muteMic = document.getElementById("muteMic");
 let muteCam = document.getElementById("muteCam");
 let rotateCamera = document.getElementById("rotateCamera");
 let flipCamMessage = document.getElementById("flipCamMessage");
+let myVideo = document.querySelector("#myVideoPlayer video");
 let clicked = false;
 const APP_ID = "62c1bcd773ea4592bb4f0f5ff8ad6b2e";
 let CHANNEL = "main";
@@ -97,7 +98,7 @@ function agoraCall() {
     if (!navigator.onLine) {
       window.location.reload();
     } else {
-      document.getElementById("myVideoPlayer").style = "transform: scaleX(-1);";
+      myVideo.style = "transform: scaleX(-1);";
       CHANNEL = channelName.value;
       mainWrap.style = "opacity: 0; transition: 0.5s;";
       setTimeout(() => {
