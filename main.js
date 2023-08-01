@@ -7,6 +7,8 @@ let joinBtn = document.getElementById("joinBtn");
 let leave = document.getElementById("leave");
 let muteMic = document.getElementById("muteMic");
 let muteCam = document.getElementById("muteCam");
+let rotateCamera = document.getElementById("rotateCamera");
+let clicked = false;
 const APP_ID = "62c1bcd773ea4592bb4f0f5ff8ad6b2e";
 let CHANNEL = "main";
 
@@ -53,7 +55,10 @@ function agoraCall() {
 
     let UID = await client.join(APP_ID, CHANNEL, null, null);
 
-    localTracks = await AgoraRTC.createMicrophoneAndCameraTracks();
+    localTracks = [
+      await AgoraRTC.createMicrophoneAudioTrack(),
+      await AgoraRTC.createCameraVideoTrack({ facingMode: "user" }),
+    ];
 
     let player = `<div class="video-player" id="user-${UID}"></div>`;
 
@@ -163,10 +168,46 @@ function agoraCall() {
     }
   };
 
+  let flipCam = async () => {
+    if (!clicked) {
+      clicked = !clicked; // true
+      localTracks[1].stop();
+      localTracks[1].close();
+
+      await client.leave();
+
+      videoStreams.innerHTML = `<div class="video-container chosen" id="myVideoPlayer"></div>`;
+
+      client.on("user-published", handleUserJoined);
+      client.on("user-left", handleUserLeft);
+
+      let UID = await client.join(APP_ID, CHANNEL, null, null);
+
+      localTracks = [
+        await AgoraRTC.createMicrophoneAudioTrack(),
+        await AgoraRTC.createCameraVideoTrack({ facingMode: "environment" }),
+      ];
+
+      let player = `<div class="video-player" id="user-${UID}"></div>`;
+
+      document
+        .getElementById("myVideoPlayer")
+        .insertAdjacentHTML("beforeend", player);
+
+      localTracks[1].play(`user-${UID}`);
+
+      await client.publish([localTracks[0], localTracks[1]]);
+    } else {
+      clicked = !clicked; // false
+      await joinAndDisplayLocalStream(CHANNEL);
+    }
+  };
+
   createChannelForm.addEventListener("submit", joinStream);
   leave.addEventListener("click", leaveAndRemoveLocalStream);
   muteMic.addEventListener("click", toggleMic);
   muteCam.addEventListener("click", toggleCam);
+  rotateCamera.addEventListener("click", flipCam);
 }
 
 function lastChildDetection() {
