@@ -178,25 +178,25 @@ function agoraCall() {
 
       videoStreams.innerHTML = `<div class="video-container chosen" id="myVideoPlayer"></div>`;
 
-      client.on("user-published", handleUserJoined);
-      client.on("user-left", handleUserLeft);
+      // client.on("user-published", handleUserJoined);
+      // client.on("user-left", handleUserLeft);
 
-      let UID = await client.join(APP_ID, CHANNEL, null, null);
+      // let UID = await client.join(APP_ID, CHANNEL, null, null);
 
-      localTracks = [
-        await AgoraRTC.createMicrophoneAudioTrack(),
-        await AgoraRTC.createCameraVideoTrack({ facingMode: "environment" }),
-      ];
+      // localTracks = [
+      //   await AgoraRTC.createMicrophoneAudioTrack(),
+      //   await AgoraRTC.createCameraVideoTrack({ facingMode: "environment" }),
+      // ];
 
-      let player = `<div class="video-player" id="user-${UID}"></div>`;
+      // let player = `<div class="video-player" id="user-${UID}"></div>`;
 
-      document
-        .getElementById("myVideoPlayer")
-        .insertAdjacentHTML("beforeend", player);
+      // document
+      //   .getElementById("myVideoPlayer")
+      //   .insertAdjacentHTML("beforeend", player);
 
-      localTracks[1].play(`user-${UID}`);
+      // localTracks[1].play(`user-${UID}`);
 
-      await client.publish([localTracks[0], localTracks[1]]);
+      // await client.publish([localTracks[0], localTracks[1]]);
     } else {
       clicked = !clicked; // false
       await joinAndDisplayLocalStream(CHANNEL);
