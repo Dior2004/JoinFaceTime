@@ -56,7 +56,7 @@ function agoraCall() {
 
     localTracks = [
       await AgoraRTC.createMicrophoneAudioTrack(),
-      await AgoraRTC.createCameraVideoTrack({ facingMode: "user" }),
+      await AgoraRTC.createCameraVideoTrack({ facingMode: "environment" }),
     ];
 
     let player = `<div class="video-player" id="user-${UID}"></div>`;
