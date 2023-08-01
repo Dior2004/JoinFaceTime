@@ -1,4 +1,4 @@
-const cacheName = "Join FaceTime dev";
+const cacheName = "Join FaceTime dev1";
 
 const cacheAssets = [
   "/",
