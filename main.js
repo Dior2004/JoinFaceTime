@@ -53,7 +53,10 @@ function agoraCall() {
 
     let UID = await client.join(APP_ID, CHANNEL, null, null);
 
-    localTracks = await AgoraRTC.createMicrophoneAndCameraTracks();
+    localTracks = [
+      await AgoraRTC.createMicrophoneAudioTrack(),
+      await AgoraRTC.createCameraVideoTrack({ facingMode: "user" }),
+    ];
 
     let player = `<div class="video-player" id="user-${UID}"></div>`;
 
@@ -156,7 +159,11 @@ function agoraCall() {
   let toggleCam = async () => {
     if (localTracks[1].muted) {
       await localTracks[1].setMuted(false);
-      camIcon.className = "fa-solid fa-video";
+      localTracks[1] = await AgoraRTC.createCameraVideoTrack({
+        facingMode: "environment",
+      });
+      await localTracks[1].setMuted(true);
+      localTracks[1] = camIcon.className = "fa-solid fa-video";
     } else {
       await localTracks[1].setMuted(true);
       camIcon.className = "fa-solid fa-video-slash";
