@@ -4,10 +4,8 @@ let createChannelForm = document.getElementById("createChannelForm");
 let streamWrap = document.getElementById("stream-wrap");
 let channelName = document.getElementById("channelName");
 let joinBtn = document.getElementById("joinBtn");
-let leave = document.getElementById("leave");
 let muteMic = document.getElementById("muteMic");
 let muteCam = document.getElementById("muteCam");
-let rotateCamera = document.getElementById("rotateCamera");
 let flipCamMessage = document.getElementById("flipCamMessage");
 let clicked = false;
 const APP_ID = "62c1bcd773ea4592bb4f0f5ff8ad6b2e";
@@ -224,10 +222,12 @@ function agoraCall() {
   };
 
   createChannelForm.addEventListener("submit", joinStream);
-  leave.addEventListener("click", leaveAndRemoveLocalStream);
+  document
+    .getElementById("leave")
+    .addEventListener("click", leaveAndRemoveLocalStream);
   muteMic.addEventListener("click", toggleMic);
   muteCam.addEventListener("click", toggleCam);
-  rotateCamera.addEventListener("click", flipCam);
+  document.getElementById("rotateCamera").addEventListener("click", flipCam);
 }
 
 function lastChildDetection() {
@@ -265,7 +265,7 @@ const observerOptions = {
 
 observer.observe(fatherEllement, observerOptions);
 
-leave.addEventListener("click", () => {
+document.getElementById("leave").addEventListener("click", () => {
   setTimeout(() => {
     if (!navigator.onLine) {
       window.location.reload();
