@@ -73,7 +73,9 @@ function agoraCall() {
   };
 
   let leaveAndRemoveLocalStream = async () => {
+    localTracks[0].stop();
     localTracks[1].stop();
+    localTracks[0].close();
     localTracks[1].close();
 
     await client.leave();
