@@ -73,10 +73,8 @@ function agoraCall() {
   };
 
   let leaveAndRemoveLocalStream = async () => {
-    for (let i = 0; localTracks.length > i; i++) {
-      localTracks[i].stop();
-      localTracks[i].close();
-    }
+    localTracks[1].stop();
+    localTracks[1].close();
 
     await client.leave();
 
@@ -87,9 +85,11 @@ function agoraCall() {
     }, 200);
 
     joinBtn.disabled = false;
+    clicked = false;
     videoStreams.innerHTML = `<div class="video-container chosen" id="myVideoPlayer"></div>`;
     micIcon.className = "fa-solid fa-microphone";
     camIcon.className = "fa-solid fa-video";
+    bgEffect();
   };
 
   let joinStream = async (e) => {
@@ -223,7 +223,7 @@ function agoraCall() {
 
   createChannelForm.addEventListener("submit", joinStream);
   document
-    .getElementById("leave")
+    .querySelector("#leaveBtn")
     .addEventListener("click", leaveAndRemoveLocalStream);
   muteMic.addEventListener("click", toggleMic);
   muteCam.addEventListener("click", toggleCam);
@@ -265,7 +265,7 @@ const observerOptions = {
 
 observer.observe(fatherEllement, observerOptions);
 
-document.getElementById("leave").addEventListener("click", () => {
+document.querySelector("#leaveBtn").addEventListener("click", () => {
   setTimeout(() => {
     if (!navigator.onLine) {
       window.location.reload();
